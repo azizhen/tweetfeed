@@ -4,7 +4,7 @@ import co.za.hendricks.display.TweetFeed;
 import co.za.hendricks.dto.TwitterUser;
 import co.za.hendricks.filemanagement.TwitterFileReader;
 import org.junit.Assert;
-import org.junit.Ignore;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
@@ -18,14 +18,22 @@ import java.util.List;
  */
 public class TweetFeedTest {
 
-    @Ignore
+    private File userFile;
+    private File tweetFile;
+
+    @Before
+    public void setup() throws URISyntaxException {
+
+        ClassLoader classLoader = getClass().getClassLoader();
+        userFile = new File( classLoader.getResource( "user.txt" ).toURI() );
+        tweetFile = new File( classLoader.getResource( "tweet.txt" ).toURI() );
+    }
+
     @Test
     public void should_return_twitter_feed() throws URISyntaxException, IOException {
 
-        File userFile = new File( this.getClass().getResource( "user.txt" ).toURI() );
-        File tweetFile = new File( this.getClass().getResource( "tweet.txt" ).toURI() );
         TwitterFileReader twitterFileReader = new TwitterFileReader(userFile, tweetFile);
-        List <TwitterUser> twitterUsers = twitterFileReader.processFiles();
+        List <TwitterUser> twitterUsers = twitterFileReader.getTwitterUsers();
 
         TweetFeed tweetFeed = new TweetFeed(twitterUsers);
         tweetFeed.displayTweets();

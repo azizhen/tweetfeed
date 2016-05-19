@@ -1,6 +1,7 @@
 package co.za.hendricks.filemanagement;
 
 import co.za.hendricks.dto.Tweet;
+import co.za.hendricks.dto.TwitterUser;
 import com.google.common.base.CharMatcher;
 import org.junit.Before;
 import org.junit.Test;
@@ -86,6 +87,12 @@ public class TwitterFileReaderTest {
         assertEquals("Random numbers should not be generated with a method chosen at random.", tweetList.get(2).getMessage().trim());
         assertEquals("Alan", tweetList.get(2).getTargetUsername().trim());
 
+    }
+
+    @Test
+    public void should_return_3_users() throws IOException {
+        List<TwitterUser> twitterUserList = twitterFileReader.getTwitterUsers();
+        assertEquals(3, twitterUserList.size());
     }
 
 
