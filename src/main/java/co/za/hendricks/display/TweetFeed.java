@@ -4,7 +4,6 @@ import co.za.hendricks.dto.Tweet;
 import co.za.hendricks.dto.TwitterUser;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -18,16 +17,6 @@ public class TweetFeed {
         this.twitterUsers = twitterUsers;
     }
 
-
-    // <tab>@user: <space>message.
-
-    /**
-     * Alan
-
-     @Alan: If you have a procedure with 10 parameters, you probably missed some.
-
-     @Alan: Random numbers should not be generated with a method chosen at random.
-     */
     public void displayTweets() {
 
         sortAlphabetically(twitterUsers);

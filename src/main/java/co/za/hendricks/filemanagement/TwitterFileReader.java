@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
  * Created by aziz on 2016/05/18.
  */
@@ -21,6 +23,11 @@ public class TwitterFileReader {
     private final File tweetFile;
 
     public TwitterFileReader(String userFilePath, String tweetFilePath) {
+        checkArgument(userFilePath != null, "Incorrect user.txt path");
+        checkArgument(userFilePath.endsWith("user.txt"), "File path must contain user.txt");
+        checkArgument(tweetFilePath != null, "Incorrect tweet.txt path");
+        checkArgument(tweetFilePath.endsWith("tweet.txt"), "File path must contain tweet.txt");
+
         this.userFile = new File(userFilePath);
         this.tweetFile = new File(tweetFilePath);
     }
