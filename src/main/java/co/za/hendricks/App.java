@@ -12,9 +12,11 @@ public class App
 {
     public static void main( String[] args ) throws IOException {
 
-        String userfilePath = "/users/aziz/Downloads/user.txt";
+//        String userfilePath = "/users/aziz/Downloads/user.txt";
+//        String tweetfilePath = "/users/aziz/Downloads/tweet.txt";
 
-        String tweetfilePath = "/users/aziz/Downloads/tweet.txt";
+        String userfilePath = args[0] ;
+        String tweetfilePath = args[1];
 
 
         TwitterFileReader twitterFileReader = new TwitterFileReader(userfilePath, tweetfilePath);
