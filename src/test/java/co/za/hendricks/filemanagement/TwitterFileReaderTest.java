@@ -1,5 +1,6 @@
 package co.za.hendricks.filemanagement;
 
+import co.za.hendricks.display.TweetFeed;
 import co.za.hendricks.dto.Tweet;
 import co.za.hendricks.dto.TwitterUser;
 import com.google.common.base.CharMatcher;
@@ -23,10 +24,11 @@ public class TwitterFileReaderTest {
     File userFile;
     File tweetFile;
     TwitterFileReader twitterFileReader;
+    ClassLoader classLoader;
 
     @Before
     public void setup() throws URISyntaxException {
-        ClassLoader classLoader = getClass().getClassLoader();
+        classLoader = getClass().getClassLoader();
         userFile = new File( classLoader.getResource( "user.txt" ).toURI() );
         tweetFile = new File( classLoader.getResource( "tweet.txt" ).toURI() );
         twitterFileReader = new TwitterFileReader(userFile, tweetFile);
@@ -93,6 +95,17 @@ public class TwitterFileReaderTest {
     public void should_return_3_users() throws IOException {
         List<TwitterUser> twitterUserList = twitterFileReader.getTwitterUsers();
         assertEquals(3, twitterUserList.size());
+    }
+
+    @Test
+    public void should_handle_large_file() throws IOException, URISyntaxException {
+        userFile = new File( classLoader.getResource( "user_large_file.txt" ).toURI() );
+        tweetFile = new File( classLoader.getResource( "tweet_large_file.txt" ).toURI() );
+        twitterFileReader.isValid();
+        List<Tweet> tweetList = twitterFileReader.getTweets();
+        assertTrue(!tweetList.isEmpty());
+
+
     }
 
 

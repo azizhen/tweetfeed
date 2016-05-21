@@ -6,12 +6,11 @@ import co.za.hendricks.dto.TwitterUser;
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
+import com.sun.tools.internal.jxc.ap.Const;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
@@ -88,14 +87,23 @@ public class TwitterFileReader {
     private void addUsersNotFollowing(List <TwitterUser> twitterUsers, List<String> result) throws IOException {
         for(String userString : result){
             String [] content = userString.split(Consts.USER_REGEX_FORMAT);
-            for(String username : content){
-                if(!doesUserExist(twitterUsers, username.trim())){
-                    TwitterUser twitterUser = new TwitterUser();
-                    twitterUser.setUserName(username.trim());
-                    twitterUser.setTweets(new ArrayList<Tweet>());
+            findUsersNotFollowing(twitterUsers, content);
+        }
+    }
 
-                    twitterUsers.add(twitterUser);
-                }
+    /**
+     * Finds Users in String Content that dont exist in {@link TwitterUser} list
+     * @param twitterUsers
+     * @param content
+     */
+    private void findUsersNotFollowing(List<TwitterUser> twitterUsers, String[] content) {
+        for(String username : content){
+            if(!doesUserExist(twitterUsers, username.trim())){
+                TwitterUser twitterUser = new TwitterUser();
+                twitterUser.setUserName(username.trim());
+                twitterUser.setTweets(new ArrayList<Tweet>());
+
+                twitterUsers.add(twitterUser);
             }
         }
     }
@@ -149,7 +157,7 @@ public class TwitterFileReader {
     }
 
     private HashSet<String> getFollowingUsers(String followingUsers) {
-        String  [] content = followingUsers.split(",");
+        String  [] content = followingUsers.split(Consts.USER_DELIMETER);
         HashSet<String> followingSet = new HashSet<String>();
         for(String users : content){
             followingSet.add(users.trim());
@@ -162,12 +170,11 @@ public class TwitterFileReader {
     protected List<Tweet> getTweets() throws IOException {
 
         List <Tweet> tweets = new ArrayList<Tweet>();
-
         List<String> result = Files.readLines(tweetFile, Charsets.US_ASCII);
 
         for(String tweetLine : result){
 
-            String [] content = tweetLine.split(">");
+            String [] content = tweetLine.split(Consts.TWEET_DELIMETER);
 
             if(isValidTweetString(content)){
                 throw new IllegalArgumentException("Invalid Tweet String found");
@@ -186,9 +193,8 @@ public class TwitterFileReader {
         return content.length > Consts.MAX_PARAMETERS_ALLOWED;
     }
 
-    private boolean isAscii(File file) throws IOException {
+    private boolean isAscii(String result) throws IOException {
 
-        String result = Files.toString(file, Charsets.US_ASCII);
         return CharMatcher.ASCII.matchesAllOf(result);
     }
 
@@ -206,6 +212,9 @@ public class TwitterFileReader {
 
     public void isValid() throws IOException {
 
+        checkArgument(userFile != null, "Must provide valid File object. Object cannot be null.");
+        checkArgument(tweetFile != null, "Must provide valid File object. Object cannot be null.");
+
         if(!userFile.exists()){
             throw new IllegalArgumentException("User File does not exist");
         }
@@ -214,12 +223,14 @@ public class TwitterFileReader {
             throw new IllegalArgumentException("Tweet File does not exist");
         }
 
-        if(!isAscii(userFile)){
-            throw new IllegalArgumentException("User File contents is not ASCII");
+        String userContent = Files.toString(userFile, Charsets.US_ASCII);
+        String tweetContent = Files.toString(tweetFile, Charsets.US_ASCII);
 
+        if(!isAscii(userContent)){
+            throw new IllegalArgumentException("User File contents is not ASCII");
         }
 
-        if(!isAscii(tweetFile)){
+        if(!isAscii(tweetContent)){
             throw new IllegalArgumentException("Tweet File contents is not ASCII");
         }
     }

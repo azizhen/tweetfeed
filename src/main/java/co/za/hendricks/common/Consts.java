@@ -21,6 +21,9 @@ public final class Consts {
         public static final String TWEET_FILE_NAME = "tweet.txt";
         public static final String USER_FILE_NAME = "user.txt";
         public static final String FOLLOWS = "follows";
+        public static final String USER_DELIMETER = ",";
+        public static final String TWEET_DELIMETER = ">";
+
 
     /**
      * Prevent the caller from instantiating an instance of the class

@@ -54,7 +54,6 @@ public class TwitterUser implements Comparable <TwitterUser>{
         this.tweets = tweets;
     }
 
-
     public int compareTo(TwitterUser o) {
 
         int result = this.getUserName().compareTo(o.getUserName());
