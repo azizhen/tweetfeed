@@ -15,8 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by aziz on 2016/05/18.
+ *
+ * @author  Aziz Hendricks
+ * @version 1.0
+ * @since   2016-5-20
  */
+
 public class TweetFeedTest {
 
     private File userFile;

@@ -44,8 +44,8 @@ public class TweetFeed {
     }
 
     private void printTweets(TwitterUser twitterUser) {
-        OutputWriter outputWriter = new ConsoleWriter();
 
+        OutputWriter outputWriter = new ConsoleWriter();
         outputWriter.write(twitterUser.getUserName());
         for(Tweet tweet : twitterUser.getTweets()){
             outputWriter.write(String.format(Consts.TWEET_REGEX_FORMAT, tweet.getTargetUsername(), tweet.getMessage()));

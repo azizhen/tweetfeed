@@ -1,25 +1,19 @@
 package co.za.hendricks.filemanagement;
 
-import co.za.hendricks.dto.Tweet;
-import co.za.hendricks.dto.TwitterUser;
-import com.google.common.base.CharMatcher;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.IllegalFormatException;
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 
 /**
- * Created by aziz on 2016/05/18.
+ *
+ * @author  Aziz Hendricks
+ * @version 1.0
+ * @since   2016-5-20
  */
+
 public class TwitterFileReaderExceptionsTest {
 
     File userFile;

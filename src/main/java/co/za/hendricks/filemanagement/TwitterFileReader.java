@@ -6,7 +6,6 @@ import co.za.hendricks.dto.TwitterUser;
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
-import com.sun.tools.internal.jxc.ap.Const;
 
 import java.io.File;
 import java.io.IOException;

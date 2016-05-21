@@ -1,6 +1,4 @@
 package co.za.hendricks.filemanagement;
-
-import co.za.hendricks.display.TweetFeed;
 import co.za.hendricks.dto.Tweet;
 import co.za.hendricks.dto.TwitterUser;
 import com.google.common.base.CharMatcher;
@@ -15,10 +13,13 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-
 /**
- * Created by aziz on 2016/05/18.
+ *
+ * @author  Aziz Hendricks
+ * @version 1.0
+ * @since   2016-5-20
  */
+
 public class TwitterFileReaderTest {
 
     File userFile;
