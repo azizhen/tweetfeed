@@ -1,6 +1,6 @@
 ## Introduction
 
-This project demonstrates using File IO to read a list of Twitter Users and Tweets
+This project demonstrates using File IO to read a list of Twitter Users and Tweets and then Write the formatted content to System Console.
 
 ## Installation
 
