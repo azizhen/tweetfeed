@@ -1,5 +1,8 @@
 package co.za.hendricks.display;
 
+import co.za.hendricks.common.Consts;
+import co.za.hendricks.display.intf.ConsoleWriter;
+import co.za.hendricks.display.intf.OutputWriter;
 import co.za.hendricks.dto.Tweet;
 import co.za.hendricks.dto.TwitterUser;
 
@@ -7,8 +10,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by aziz on 2016/05/18.
+ * This class is responsible for displaying the twitter feed to the Console
+ * using the provided list of {@link TwitterUser}
+ *
+ * @author  Aziz Hendricks
+ * @version 1.0
+ * @since   2016-5-20
  */
+
 public class TweetFeed {
 
     List<TwitterUser> twitterUsers;
@@ -17,26 +26,29 @@ public class TweetFeed {
         this.twitterUsers = twitterUsers;
     }
 
+    /**
+     * Displays Tweets contained in {@link TwitterUser} list in Alphabetically Ascending order
+     *
+     */
     public void displayTweets() {
 
-        sortAlphabetically(twitterUsers);
+        sortAlphabeticallyAscending(twitterUsers);
 
         for(TwitterUser twitterUser : twitterUsers){
-            System.out.println(twitterUser.getUserName());
             printTweets(twitterUser);
-
         }
     }
 
-    private void sortAlphabetically(List<TwitterUser> twitterUsers) {
+    private void sortAlphabeticallyAscending(List<TwitterUser> twitterUsers) {
         Collections.sort(twitterUsers);
-
     }
 
     private void printTweets(TwitterUser twitterUser) {
-        for(Tweet tweet : twitterUser.getTweets()){
-            System.out.println(String.format("\t@%s: %s", tweet.getTargetUsername(), tweet.getMessage()));
+        OutputWriter outputWriter = new ConsoleWriter();
 
+        outputWriter.write(twitterUser.getUserName());
+        for(Tweet tweet : twitterUser.getTweets()){
+            outputWriter.write(String.format(Consts.TWEET_REGEX_FORMAT, tweet.getTargetUsername(), tweet.getMessage()));
         }
     }
 }

@@ -1,5 +1,6 @@
 package co.za.hendricks.filemanagement;
 
+import co.za.hendricks.common.Consts;
 import co.za.hendricks.dto.Tweet;
 import co.za.hendricks.dto.TwitterUser;
 import com.google.common.base.CharMatcher;
@@ -15,28 +16,45 @@ import java.util.List;
 import static com.google.common.base.Preconditions.checkArgument;
 
 /**
- * Created by aziz on 2016/05/18.
+ * Reads in the contents of a Text File and converts into a {@link TwitterUser} list
+ *
+ * @author  Aziz Hendricks
+ * @version 1.0
+ * @since   2016-5-20
  */
+
 public class TwitterFileReader {
 
     private final File userFile;
     private final File tweetFile;
 
+    /**
+     * Construct using File Paths
+     * @param userFilePath
+     * @param tweetFilePath
+     */
     public TwitterFileReader(String userFilePath, String tweetFilePath) {
-        checkArgument(userFilePath != null, "Incorrect user.txt path");
-        checkArgument(userFilePath.endsWith("user.txt"), "File path must contain user.txt");
-        checkArgument(tweetFilePath != null, "Incorrect tweet.txt path");
-        checkArgument(tweetFilePath.endsWith("tweet.txt"), "File path must contain tweet.txt");
-
+        validateArguments(userFilePath, tweetFilePath);
         this.userFile = new File(userFilePath);
         this.tweetFile = new File(tweetFilePath);
     }
 
+    /**
+     * Construct using Files
+     * @param userFile
+     * @param tweetFile
+     */
     public TwitterFileReader(File userFile, File tweetFile) {
         this.userFile = userFile;
         this.tweetFile = tweetFile;
     }
 
+    /**
+     * Reads in the content of the file and converts it into a List of {@link TwitterUser}
+     *
+     * @return List of {@link TwitterUser}
+     * @throws IOException
+     */
     public List<TwitterUser> getTwitterUsers() throws IOException {
 
         List <TwitterUser> twitterUsers = new ArrayList<TwitterUser>();
@@ -44,9 +62,9 @@ public class TwitterFileReader {
 
         for(String user : result){
 
-            String [] content = user.split("follows");
-            String username = content[0].trim();
-            String followers = content[1];
+            String [] content = user.split(Consts.FOLLOWS);
+            String username = content[Consts.PARAMATER_LOCATION_ONE].trim();
+            String followers = content[Consts.PARAMATER_LOCATION_TWO];
             if(doesUserExist(twitterUsers, username)){
                 addFollowersToExistingUser(twitterUsers, username, followers);
             }else{
@@ -56,7 +74,6 @@ public class TwitterFileReader {
         }
 
         addUsersNotFollowing(twitterUsers, result);
-
 
         return twitterUsers;
 
@@ -70,12 +87,13 @@ public class TwitterFileReader {
      */
     private void addUsersNotFollowing(List <TwitterUser> twitterUsers, List<String> result) throws IOException {
         for(String userString : result){
-            String [] content = userString.split("(follows|,)");
+            String [] content = userString.split(Consts.USER_REGEX_FORMAT);
             for(String username : content){
                 if(!doesUserExist(twitterUsers, username.trim())){
                     TwitterUser twitterUser = new TwitterUser();
                     twitterUser.setUserName(username.trim());
                     twitterUser.setTweets(new ArrayList<Tweet>());
+
                     twitterUsers.add(twitterUser);
                 }
             }
@@ -161,11 +179,11 @@ public class TwitterFileReader {
     }
 
     private Tweet createTweetFromStringArray(String[] content) {
-        return new Tweet(content[0], content[1]);
+        return new Tweet(content[Consts.PARAMATER_LOCATION_ONE], content[Consts.PARAMATER_LOCATION_TWO]);
     }
 
     private boolean isValidTweetString(String[] content) {
-        return content.length > 2;
+        return content.length > Consts.MAX_PARAMETERS_ALLOWED;
     }
 
     private boolean isAscii(File file) throws IOException {
@@ -204,6 +222,12 @@ public class TwitterFileReader {
         if(!isAscii(tweetFile)){
             throw new IllegalArgumentException("Tweet File contents is not ASCII");
         }
+    }
 
+    private void validateArguments(String userFilePath, String tweetFilePath) {
+        checkArgument(userFilePath != null, "Incorrect " + Consts.USER_FILE_NAME +" path");
+        checkArgument(userFilePath.endsWith(Consts.USER_FILE_NAME), "File path must contain "+Consts.USER_FILE_NAME);
+        checkArgument(tweetFilePath != null, "Incorrect "+Consts.TWEET_FILE_NAME+" path");
+        checkArgument(tweetFilePath.endsWith(Consts.TWEET_FILE_NAME), "File path must contain "+Consts.TWEET_FILE_NAME);
     }
 }

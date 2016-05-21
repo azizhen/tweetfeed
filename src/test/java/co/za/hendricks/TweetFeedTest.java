@@ -1,5 +1,6 @@
 package co.za.hendricks;
 
+import co.za.hendricks.common.Consts;
 import co.za.hendricks.display.TweetFeed;
 import co.za.hendricks.dto.TwitterUser;
 import co.za.hendricks.filemanagement.TwitterFileReader;
@@ -25,8 +26,8 @@ public class TweetFeedTest {
     public void setup() throws URISyntaxException {
 
         ClassLoader classLoader = getClass().getClassLoader();
-        userFile = new File( classLoader.getResource( "user.txt" ).toURI() );
-        tweetFile = new File( classLoader.getResource( "tweet.txt" ).toURI() );
+        userFile = new File( classLoader.getResource( Consts.USER_FILE_NAME ).toURI() );
+        tweetFile = new File( classLoader.getResource(Consts.TWEET_FILE_NAME).toURI() );
     }
 
     @Test
