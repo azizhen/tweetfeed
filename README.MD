@@ -4,7 +4,7 @@ This project demonstrates using File IO to read a list of Twitter Users and Twee
 
 ## Installation
 
-To build the executable:
+**To build the executable:**
 
 Install Java 7
 Install Maven
@@ -13,21 +13,21 @@ Navigate to the root folder of the project where pom.xml is located.
 
 Execute the following command
 
-mvn clean install
+_mvn clean install_
 
 This will generate a JAR file called tweetfeed-1.0-jar-with-dependencies.jar in the target folder.
 
-To run the file:
+**To run the executable**
 
 Navigate to the target folder within the root of the project folder.
 
 Provide two text file paths as input user.txt and tweet.txt. 
 
-java -jar tweetfeed-1.0-jar-with-dependencies.jar <PATH>/user.txt <PATH>/tweet.txt
+_java -jar tweetfeed-1.0-jar-with-dependencies.jar <PATH>/user.txt <PATH>/tweet.txt_
 
 eg. 
 
-java -jar tweetfeed-1.0-jar-with-dependencies.jar /users/aziz/Downloads/user.txt /users/aziz/Downloads/tweet.txt
+_java -jar tweetfeed-1.0-jar-with-dependencies.jar /users/aziz/Downloads/user.txt /users/aziz/Downloads/tweet.txt_
 
 ## Assumptions
 

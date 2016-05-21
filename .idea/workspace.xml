@@ -1,18 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e24adac4-ff6a-4a13-90f5-f1f3fe97b59f" name="Default" comment="Added missing Java Doc. Refactored Strings into Consts file">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/co/za/hendricks/filemanagement/TwitterFileReaderExceptionsTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/resources/invalid_files/tweet_missing_delimeters.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/resources/invalid_files/user_missing_delimeters.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/resources/tweet_large_file.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/resources/user_large_file.txt" />
+    <list default="true" id="e24adac4-ff6a-4a13-90f5-f1f3fe97b59f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.MD" afterPath="$PROJECT_DIR$/README.MD" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/co/za/hendricks/common/Consts.java" afterPath="$PROJECT_DIR$/src/main/java/co/za/hendricks/common/Consts.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/co/za/hendricks/dto/TwitterUser.java" afterPath="$PROJECT_DIR$/src/main/java/co/za/hendricks/dto/TwitterUser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/co/za/hendricks/filemanagement/TwitterFileReader.java" afterPath="$PROJECT_DIR$/src/main/java/co/za/hendricks/filemanagement/TwitterFileReader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/co/za/hendricks/filemanagement/TwitterFileReaderTest.java" afterPath="$PROJECT_DIR$/src/test/java/co/za/hendricks/filemanagement/TwitterFileReaderTest.java" />
     </list>
     <ignored path="tweetfeed.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -58,8 +49,8 @@
           </provider>
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.4219949">
-                <caret line="33" column="120" selection-start-line="33" selection-start-column="120" selection-end-line="33" selection-end-column="120" />
+              <first_editor vertical-scroll-proportion="-0.5345268">
+                <caret line="15" column="8" selection-start-line="15" selection-start-column="1" selection-end-line="16" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -1260,7 +1251,7 @@
       <workItem from="1463582217584" duration="14185000" />
       <workItem from="1463684008289" duration="6470000" />
       <workItem from="1463755666782" duration="7418000" />
-      <workItem from="1463856272192" duration="3384000" />
+      <workItem from="1463856272192" duration="3543000" />
     </task>
     <task id="LOCAL-00001" summary="Added gitignore and cleanup files">
       <created>1463683750064</created>
@@ -1316,7 +1307,13 @@
       <option name="project" value="LOCAL" />
       <updated>1463811412522</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Added negative test cases and update readme">
+      <created>1463859700084</created>
+      <option name="number" value="00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1463859700084</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1352,7 +1349,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31457000" />
+    <option name="totallyTimeSpent" value="31616000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1636" height="997" extended-state="0" />
@@ -1404,7 +1401,8 @@
     <MESSAGE value="Added README.MD&#10;" />
     <MESSAGE value="Added argument checking when running via jar command&#10;" />
     <MESSAGE value="Added missing Java Doc. Refactored Strings into Consts file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added missing Java Doc. Refactored Strings into Consts file" />
+    <MESSAGE value="Added negative test cases and update readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added negative test cases and update readme" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1795,8 +1793,8 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.4219949">
-            <caret line="33" column="120" selection-start-line="33" selection-start-column="120" selection-end-line="33" selection-end-column="120" />
+          <first_editor vertical-scroll-proportion="-0.5345268">
+            <caret line="15" column="8" selection-start-line="15" selection-start-column="1" selection-end-line="16" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor />
