@@ -25,13 +25,13 @@ Execute the following command
 ```shell
 mvn clean install
 ```
-This will generate a JAR file called tweetfeed-1.0-jar-with-dependencies.jar in the target folder.
+This will generate a JAR file called **tweetfeed-1.0-jar-with-dependencies.jar** in the target folder.
 
 **To run the executable**
 
 1. Navigate to the target folder within the root of the project folder.
 
-2. Provide two text file paths as input user.txt and tweet.txt. 
+2. Provide two text file paths as input **user.txt** and **tweet.txt**. 
 
 ```shell
 java -jar tweetfeed-1.0-jar-with-dependencies.jar <PATH>/user.txt <PATH>/tweet.txt
