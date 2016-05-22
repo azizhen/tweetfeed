@@ -1,6 +1,13 @@
 ## Introduction
 
 This project demonstrates using File IO to read a list of Twitter Users and Tweets and then Write the formatted content to System Console.
+It demonstrates examples of using the following:
+
+Development Practice          | Framework
+----------------------------- | -------------
+Test Driven Development       | Junit
+Behaviour Driven Development  | Cucumber
+Code Quality Analysis         | CheckStyle and FindBugs
 
 ## Installation
 

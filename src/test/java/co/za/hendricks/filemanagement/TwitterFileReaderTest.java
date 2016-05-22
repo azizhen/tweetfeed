@@ -22,10 +22,10 @@ import static org.junit.Assert.assertTrue;
 
 public class TwitterFileReaderTest {
 
-    File userFile;
-    File tweetFile;
-    TwitterFileReader twitterFileReader;
-    ClassLoader classLoader;
+    protected File userFile;
+    protected File tweetFile;
+    protected TwitterFileReader twitterFileReader;
+    protected ClassLoader classLoader;
 
     @Before
     public void setup() throws URISyntaxException {
@@ -37,7 +37,7 @@ public class TwitterFileReaderTest {
     }
 
     @Test
-    public void should_validate_files_succesfully() throws IOException, URISyntaxException {
+    public void should_validate_files_successfully() throws IOException, URISyntaxException {
 
         TwitterFileReader twitterFileReader = new TwitterFileReader(userFile, tweetFile);
         twitterFileReader.isValid();

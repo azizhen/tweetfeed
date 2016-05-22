@@ -23,13 +23,13 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 public class TwitterFileReader {
 
-    private final File userFile;
-    private final File tweetFile;
+    private File userFile;
+    private File tweetFile;
 
     /**
      * Construct using File Paths
-     * @param userFilePath
-     * @param tweetFilePath
+     * @param userFilePath The System path of the location of the user.txt file
+     * @param tweetFilePath The System path of the location of the tweet.txt file
      */
     public TwitterFileReader(String userFilePath, String tweetFilePath) {
         validateArguments(userFilePath, tweetFilePath);
@@ -39,8 +39,8 @@ public class TwitterFileReader {
 
     /**
      * Construct using Files
-     * @param userFile
-     * @param tweetFile
+     * @param userFile The File object for the user.txt file
+     * @param tweetFile The File object for the tweet.txt file
      */
     public TwitterFileReader(File userFile, File tweetFile) {
         this.userFile = userFile;
@@ -79,11 +79,10 @@ public class TwitterFileReader {
 
     /**
      * Finds people being Followed in the list that have not yet been added as Twitter Users and adds them to list
-     * @param twitterUsers
-     * @param result
-     * @return
+     * @param twitterUsers The list of Twitter Users
+     * @param result The unparsed list of of Users being followed
      */
-    private void addUsersNotFollowing(List <TwitterUser> twitterUsers, List<String> result) throws IOException {
+    private void addUsersNotFollowing(List <TwitterUser> twitterUsers, List<String> result) {
         for(String userString : result){
             String [] content = userString.split(Consts.USER_REGEX_FORMAT);
             findUsersNotFollowing(twitterUsers, content);
@@ -91,9 +90,9 @@ public class TwitterFileReader {
     }
 
     /**
-     * Finds Users in String Content that dont exist in {@link TwitterUser} list
-     * @param twitterUsers
-     * @param content
+     * Finds Users in String Content that don't exist in {@link TwitterUser} list
+     * @param twitterUsers The list of Twitter Users
+     * @param content The String content that contains usernames
      */
     private void findUsersNotFollowing(List<TwitterUser> twitterUsers, String[] content) {
         for(String username : content){
@@ -137,9 +136,9 @@ public class TwitterFileReader {
 
     /**
      * Given a username and a list of users being followed, filter tweets applicable
-     * @param userName
+     * @param userName The username for a given user
      * @param following - the list of users that this user is following
-     * @return
+     * @return Returns a list of tweets associated to a user
      */
     private List<Tweet> retrieveTweets(String userName, HashSet<String> following) throws IOException {
         List <Tweet> tweets = getTweets();
@@ -156,7 +155,7 @@ public class TwitterFileReader {
     }
 
     private HashSet<String> getFollowingUsers(String followingUsers) {
-        String  [] content = followingUsers.split(Consts.USER_DELIMETER);
+        String  [] content = followingUsers.split(Consts.USER_DELIMITER);
         HashSet<String> followingSet = new HashSet<String>();
         for(String users : content){
             followingSet.add(users.trim());
@@ -173,7 +172,7 @@ public class TwitterFileReader {
 
         for(String tweetLine : result){
 
-            String [] content = tweetLine.split(Consts.TWEET_DELIMETER);
+            String [] content = tweetLine.split(Consts.TWEET_DELIMITER);
 
             if(isValidTweetString(content)){
                 throw new IllegalArgumentException("Invalid Tweet String found");
@@ -185,14 +184,26 @@ public class TwitterFileReader {
     }
 
     private Tweet createTweetFromStringArray(String[] content) {
-        return new Tweet(content[Consts.PARAMATER_LOCATION_ONE], content[Consts.PARAMATER_LOCATION_TWO]);
+
+        String targetUsername = content[Consts.PARAMATER_LOCATION_ONE];
+        String message = content[Consts.PARAMATER_LOCATION_TWO];
+
+        validateTweetMessageLength(message);
+
+        return new Tweet(targetUsername, message);
+    }
+
+    protected void validateTweetMessageLength(String message) {
+        if(message.length() > Consts.MAX_TWEET_MESSAGE){
+            throw new IllegalArgumentException("Tweet Message has more characters than maximum: " + Consts.MAX_TWEET_MESSAGE);
+        }
     }
 
     private boolean isValidTweetString(String[] content) {
         return content.length > Consts.MAX_PARAMETERS_ALLOWED;
     }
 
-    private boolean isAscii(String result) throws IOException {
+    private boolean isAscii(String result){
 
         return CharMatcher.ASCII.matchesAllOf(result);
     }

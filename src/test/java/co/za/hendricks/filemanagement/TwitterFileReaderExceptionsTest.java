@@ -16,10 +16,10 @@ import java.net.URISyntaxException;
 
 public class TwitterFileReaderExceptionsTest {
 
-    File userFile;
-    File tweetFile;
-    TwitterFileReader twitterFileReader;
-    ClassLoader classLoader;
+    private File userFile;
+    private File tweetFile;
+    private TwitterFileReader twitterFileReader;
+    private ClassLoader classLoader;
 
     @Before
     public void setup() throws URISyntaxException {
@@ -51,7 +51,17 @@ public class TwitterFileReaderExceptionsTest {
     public void should_fail_when_tweet_file_is_null() throws IOException {
 
         tweetFile = null;
-        TwitterFileReader twitterFileReader = new TwitterFileReader(userFile, tweetFile);
+        twitterFileReader = new TwitterFileReader(userFile, tweetFile);
         twitterFileReader.isValid();
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void should_fail_when_tweet_length_too_long(){
+        String longTweet = "111212332131312412412312312312321312312321321312321421421421412412421421421421421412421412" +
+                "41241241241241242141241242142141241242141111212332131312412412312312312321312312321321312321421421421412" +
+                "41242142142142142141242141241241241241241242141241242142141241242141412421421421421421412421412412412412" +
+                "41241242141241242142141241242141";
+        TwitterFileReader twitterFileReader = new TwitterFileReader(userFile, tweetFile);
+        twitterFileReader.validateTweetMessageLength(longTweet);
     }
 }

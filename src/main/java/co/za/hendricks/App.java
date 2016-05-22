@@ -20,7 +20,7 @@ import static com.google.common.base.Preconditions.checkArgument;
  * @version 1.0
  * @since   2016-5-20
  */
-public class App
+class App
 {
     public static void main( String[] args ) throws IOException {
 

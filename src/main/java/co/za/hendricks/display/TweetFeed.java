@@ -20,7 +20,7 @@ import java.util.List;
 
 public class TweetFeed {
 
-    List<TwitterUser> twitterUsers;
+    private final List<TwitterUser> twitterUsers;
 
     public TweetFeed(List<TwitterUser> twitterUsers) {
         this.twitterUsers = twitterUsers;

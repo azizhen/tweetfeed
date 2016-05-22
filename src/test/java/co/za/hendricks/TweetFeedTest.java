@@ -47,7 +47,7 @@ public class TweetFeedTest {
 
     @Test
     public void should_maintain_insertion_order(){
-        List <String> inputList = new ArrayList();
+        ArrayList <String> inputList = new ArrayList();
         inputList.add("1");
         inputList.add("2");
         inputList.add("3");
